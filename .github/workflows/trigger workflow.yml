@@ -20,15 +20,15 @@ jobs:
               --header 'Authorization: Bearer ${{ secrets.REPO_ACCESS_TOKEN }}' \
               --data '{"ref": "${{ github.ref }}"}'
 
-  Slack:
-    runs-on: ubuntu-latest
-    steps:
-        - name: Slack Notify
-          uses: rtCamp/action-slack-notify@v2.0.1
-          env:
-            SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-            SLACK_CHANNEL: devops-december-2022
-            SLACK_TITLE: Build Success
-            SLACK_COLOR: '#43a047'
-            SLACK_MESSAGE: ${{ github.repository }} Build Success
-            SLACK_USERNAME: ${{ github.repository }}
+#   Slack:
+#     runs-on: ubuntu-latest
+#     steps:
+#         - name: Slack Notify
+#           uses: rtCamp/action-slack-notify@v2.0.1
+#           env:
+#             SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+#             SLACK_CHANNEL: devops-december-2022
+#             SLACK_TITLE: Build Success
+#             SLACK_COLOR: '#43a047'
+#             SLACK_MESSAGE: ${{ github.repository }} Build Success
+#             SLACK_USERNAME: ${{ github.repository }}
