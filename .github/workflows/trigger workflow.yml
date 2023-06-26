@@ -1,0 +1,34 @@
+
+name: trigger workflow
+on:
+  
+  push:
+    
+
+jobs:
+
+  trigger:
+    
+    runs-on: ubuntu-latest
+
+
+    steps:
+        - name: trigger another workflow
+          run: |
+              curl -X POST https://api.github.com/repos/${{ github.repository }}/actions/workflows/issue.yml/dispatches \
+              -H 'Accept: application/vnd.github.v3+json' \
+              --header 'Authorization: Bearer ${{ secrets.REPO_ACCESS_TOKEN }}' \
+              --data '{"ref": "${{ github.ref }}"}'
+
+  Slack:
+    runs-on: ubuntu-latest
+    steps:
+        - name: Slack Notify
+          uses: rtCamp/action-slack-notify@v2.0.1
+          env:
+            SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+            SLACK_CHANNEL: devops-december-2022
+            SLACK_TITLE: Build Success
+            SLACK_COLOR: '#43a047'
+            SLACK_MESSAGE: ${{ github.repository }} Build Success
+            SLACK_USERNAME: ${{ github.repository }}
